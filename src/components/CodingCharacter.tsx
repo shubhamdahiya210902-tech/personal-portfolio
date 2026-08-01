@@ -8,8 +8,8 @@ function MatrixScreen({ color }: { color: string }) {
   const textRef = useRef<THREE.Group>(null!);
   const columns = useMemo(() => Array.from({ length: 6 }, (_, i) => ({
     x: -0.25 + (i * 0.1),
-    speed: 0.5 + Math.random() * 2,
-    chars: Array.from({ length: 8 }, () => Math.floor(Math.random() * 10)).join('\n')
+    speed: 0.7 + i * 0.22,
+    chars: Array.from({ length: 8 }, (_, j) => ((i + j * 3) % 10).toString()).join('\n')
   })), []);
 
   useFrame((state) => {
@@ -113,10 +113,10 @@ function RoomScene({ isAngry, setIsAngry }: { isAngry: boolean, setIsAngry: (v: 
         <group position={[0, 0.05, -0.1]}>
           <mesh><boxGeometry args={[0.8, 0.02, 0.6]} /><meshStandardMaterial color="#333" /></mesh>
           <mesh position={[0, 0.3, -0.3]} rotation={[0.4, 0, 0]}><boxGeometry args={[0.8, 0.6, 0.02]} /><meshStandardMaterial color="#222" /></mesh>
-          <group position={[0, 0.3, -0.28]} rotation={[0.4, 0, 0]}>
+          <mesh position={[0, 0.3, -0.28]} rotation={[0.4, 0, 0]}>
             <planeGeometry args={[0.75, 0.55]} /><meshBasicMaterial color="#000" />
             <MatrixScreen color={mainGlow} />
-          </group>
+          </mesh>
           <pointLight position={[0, 0.2, 0.3]} intensity={4} color={mainGlow} distance={4} />
         </group>
       </group>
@@ -134,14 +134,14 @@ export default function CodingCharacter() {
   const [isAngry, setIsAngry] = useState(false);
 
   return (
-    <div className="relative w-full max-w-[800px] aspect-square rounded-3xl overflow-hidden border border-white/5 bg-[#030108] shadow-2xl">
-      <Canvas shadows camera={{ position: [5, 4, 6], fov: 32 }}>
+    <div className="relative h-[380px] w-full overflow-hidden sm:h-[460px] lg:h-[520px]" aria-label="Interactive 3D coding scene">
+      <Canvas shadows dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }} camera={{ position: [5, 4, 6], fov: 32 }}>
         <RoomScene isAngry={isAngry} setIsAngry={setIsAngry} />
         <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 3} maxPolarAngle={Math.PI / 2.2} />
         <Environment preset="night" />
       </Canvas>
       {isAngry && (
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded border border-red-500 bg-red-950/30 text-red-500 font-mono text-[10px] tracking-widest animate-pulse pointer-events-none z-50">
+        <div className="absolute left-1/2 top-6 z-50 -translate-x-1/2 rounded-md border border-red-500 bg-red-950/30 px-4 py-1.5 font-mono text-[10px] text-red-500 animate-pulse pointer-events-none">
           DND: ARCHITECT_BUSY
         </div>
       )}

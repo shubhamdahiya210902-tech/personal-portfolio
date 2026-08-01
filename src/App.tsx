@@ -1,25 +1,35 @@
 import Hero from './components/Hero';
+import TargetingStrip from './components/TargetingStrip';
+import RecruiterSnapshot from './components/RecruiterSnapshot';
 import About from './components/About';
+import EvidenceMatrix from './components/EvidenceMatrix';
+import ArchitectureMap from './components/ArchitectureMap';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Nav from './components/Nav';
+import ScrollProgress from './components/ScrollProgress';
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
-      <div className="noise-overlay"></div>
-      
-      {/* Ambient background glow */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-secondary/10 blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/10 blur-[120px]" />
-      </div>
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-gray-100">
+      <div className="site-grid" aria-hidden="true" />
+      <ScrollProgress />
+      <Nav />
 
-      <div className="relative z-10 container mx-auto px-6 py-12 md:py-24">
+      <main className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Hero />
+        <TargetingStrip />
+        <RecruiterSnapshot />
         <About />
+        <EvidenceMatrix />
+        <ArchitectureMap />
         <Projects />
+        <Experience />
+        <Contact />
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

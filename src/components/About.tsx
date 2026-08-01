@@ -1,52 +1,84 @@
-import { motion } from 'framer-motion';
+import { BrainCircuit, Database, FileCheck2, Server, ShieldCheck } from 'lucide-react';
 
-const skills = [
-  "Python", "Java / Spring Boot", "JavaScript / TypeScript",
-  "React", "Node.js", "FastAPI",
-  "SQL / PostgreSQL", "AWS (EC2, S3)", "Docker & Linux",
-  "TensorFlow / PyTorch", "LSTM & Transformers", "LLM Integration (Gemini)",
-  "Phishing Detection", "CyberOps (CISCO)", "Secure CLI Design",
-  "Git / GitHub", "Agile / Scrum", "Technical Writing"
+const capabilityGroups = [
+  {
+    title: 'Backend and Data Systems',
+    icon: <Server className="h-5 w-5" />,
+    skills: ['Python', 'FastAPI', 'REST APIs', 'PostgreSQL', 'MariaDB-Galera', 'AWS-hosted services', 'SQL indexing'],
+  },
+  {
+    title: 'AI Evaluation Workflows',
+    icon: <BrainCircuit className="h-5 w-5" />,
+    skills: ['LangGraph', 'LangChain Core', 'LiteLLM', 'LLM scoring rubrics', 'groundedness checks', 'human-in-the-loop review'],
+  },
+  {
+    title: 'Security Automation',
+    icon: <ShieldCheck className="h-5 w-5" />,
+    skills: ['MISP integrations', 'token-scoped APIs', 'phishing reporting', 'responsible disclosure', 'Cisco CyberOps'],
+  },
+  {
+    title: 'Applied ML and Research',
+    icon: <Database className="h-5 w-5" />,
+    skills: ['PyTorch', 'Hugging Face', 'scikit-learn', 'LSTM forecasting', 'TF-IDF pipelines', 'technical writing'],
+  },
+];
+
+const principles = [
+  'Evidence before claims',
+  'Human review for AI outputs',
+  'Readable services over clever code',
+  'Security and validation by default',
 ];
 
 export default function About() {
   return (
-    <section className="py-32 border-t border-white/10">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-        <motion.div 
-          className="md:col-span-4"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">Engineering <br/>Across the <br/><span className="text-primary">Stack.</span></h2>
-        </motion.div>
+    <section id="about" className="section-shell scroll-reveal">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.82fr_1.18fr]">
+        <div>
+          <p className="eyebrow mb-4">About</p>
+          <h2 className="max-w-xl text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+            Research-minded engineer, practical enough to ship.
+          </h2>
+        </div>
 
-        <motion.div
-          className="md:col-span-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="space-y-8 text-xl text-gray-300 leading-relaxed font-light">
-            <p>
-              I'm a Master's student in <b className="text-white font-medium italic">Applied Research in Computer Science</b> at Hof University, and a Research Assistant working on phishing-detection plugins for Thunderbird &amp; Outlook and AWS-hosted backend services — the kind of work that lands halfway between clean product engineering and security research.
-            </p>
-            <p>
-              Across projects I've shipped <b className="text-white font-medium">full-stack features</b> in React / Node.js / FastAPI, trained <b className="text-white font-medium">deep-learning models</b> (LSTM, Transformers) on real-world GPS and NL-to-code datasets, and run <b className="text-white font-medium">distributed storage</b> on AWS with MariaDB Galera. My NL2Code paper was published at SmartCom 2024, and my Career-Ops CLI is MIT-licensed on GitHub — I like the full arc from research to production.
-            </p>
-          </div>
+        <div className="space-y-6">
+          <p className="text-lg leading-8 text-gray-300">
+            I am studying MSc Applied Research in Computer Science at Hof University and working as a Research Assistant on applied software systems. My strongest overlap is Python backend engineering, structured data workflows, AI-assisted review, and security-aware automation.
+          </p>
+          <p className="text-lg leading-8 text-gray-300">
+            The work I like most has a clear review loop: build a service, validate the data, document the assumptions, and make the output easy for another person to trust. That shows up in my FastAPI/PostgreSQL work, my MISP phishing-reporting workflow, and my LangGraph-based review system for evidence mapping and coverage scoring.
+          </p>
 
-          <div className="flex flex-wrap gap-4 mt-12">
-            {skills.map((skill, i) => (
-              <span key={i} className="px-6 py-3 glass rounded-xl text-sm font-semibold text-gray-200 hover:border-primary/50 transition-colors">
-                {skill}
-              </span>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {principles.map((principle) => (
+              <div key={principle} className="motion-card flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-medium text-gray-200">
+                <FileCheck2 className="h-4 w-4 shrink-0 text-primary" />
+                {principle}
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
+      </div>
+
+      <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {capabilityGroups.map((group) => (
+          <div
+            key={group.title}
+            className="motion-card rounded-lg border border-white/10 bg-surface/80 p-5"
+          >
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              {group.icon}
+            </div>
+            <h3 className="mb-4 text-lg font-bold text-white">{group.title}</h3>
+            <div className="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span key={skill} className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-xs text-gray-300">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
