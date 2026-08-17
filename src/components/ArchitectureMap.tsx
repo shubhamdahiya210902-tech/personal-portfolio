@@ -16,6 +16,18 @@ type SystemFlow = {
 
 const systems: SystemFlow[] = [
   {
+    title: 'Jarvis Local PC Assistant',
+    subtitle: 'On-demand Windows assistant with local AI and dashboard telemetry.',
+    signal: 'Best proof for end-to-end local tooling: CLI design, voice flow, UI state, Ollama integration, and safety gates.',
+    steps: [
+      { label: 'CLI launch', detail: '`jarvis wake` starts the assistant from any folder.', icon: <ArrowRight className="h-4 w-4" /> },
+      { label: 'Dashboard', detail: 'Brave opens a local state and command interface.', icon: <Server className="h-4 w-4" /> },
+      { label: 'Wake flow', detail: 'Clap signal plus spoken phrase gates activation.', icon: <BrainCircuit className="h-4 w-4" /> },
+      { label: 'Safety layer', detail: 'Risky commands require explicit approval.', icon: <ShieldCheck className="h-4 w-4" /> },
+      { label: 'Local brain', detail: 'Ollama routes commands without a paid API key.', icon: <CheckCircle2 className="h-4 w-4" /> },
+    ],
+  },
+  {
     title: 'LangGraph Review Workflow',
     subtitle: 'LLM output review with evidence mapping and human approval.',
     signal: 'Best proof for AI evaluation, agentic workflow, groundedness checks, and careful automation.',
@@ -48,11 +60,11 @@ export default function ArchitectureMap() {
         <div>
           <p className="eyebrow mb-4">Architecture proof</p>
           <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-            Two systems recruiters can understand in one glance.
+            Three systems recruiters can understand in one glance.
           </h2>
         </div>
         <p className="text-lg leading-8 text-gray-400">
-          These are the clearest bridges from project work to interview depth: one AI review workflow and one backend data service, each shown as a practical flow rather than a wall of tools.
+          These are the clearest bridges from project work to interview depth: one local assistant, one AI review workflow, and one backend data service, each shown as a practical flow rather than a wall of tools.
         </p>
       </div>
 

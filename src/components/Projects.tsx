@@ -24,10 +24,56 @@ type Project = {
   link?: string;
   proofType?: string;
   proofDetail?: string;
+  media?: {
+    src: string;
+    alt: string;
+  };
   caseStudy?: CaseStudy;
 };
 
+const jarvisPreview = `${import.meta.env.BASE_URL}projects/jarvis-dashboard-demo.gif`;
+
 const projects: Project[] = [
+  {
+    title: 'Jarvis Local PC Assistant',
+    area: 'Local AI automation and Windows tooling',
+    icon: <BrainCircuit className="h-5 w-5" />,
+    summary: 'Public Windows assistant prototype with a global CLI, Brave dashboard, clap-and-voice wake flow, Ollama-backed command interpretation, and safety gates around risky actions.',
+    answers: 'Can he build a usable local AI tool end-to-end, not just a notebook or static demo?',
+    evidence: [
+      'Global `jarvis` command works from any PowerShell or Command Prompt location',
+      'Wake flow opens a local dashboard, listens for a clap, then accepts the phrase `wake up jarvis`',
+      'Smoke-tested safety checks, command routing, wake phrase matching, and dashboard behavior',
+    ],
+    tags: ['Python', 'Ollama', 'Windows automation', 'Voice workflow', 'Local dashboard'],
+    proofType: 'Public GitHub repo',
+    proofDetail: 'Includes README, demo GIF, screenshot assets, safe example config, CLI installer, and smoke tests.',
+    link: 'https://github.com/shubhamdahiya210902-tech/jarvis-local-pc-assistant',
+    media: {
+      src: jarvisPreview,
+      alt: 'Animated Jarvis local dashboard showing sleep, wake phrase, and command states',
+    },
+    size: 'wide',
+    caseStudy: {
+      problem: 'I wanted a local assistant that could start on demand, show its state visually, and help with simple PC automation without pretending to be a production-grade security or enterprise assistant. The useful challenge was making the flow feel real while keeping it safe, inspectable, and local-first.',
+      architecture: [
+        'A global Windows launcher starts the Python package from any directory and routes commands into CLI, single-command, or wake mode.',
+        'Wake mode opens a Brave dashboard, owns the microphone during the clap and phrase flow, then moves into voice command mode after the boot sequence.',
+        'Ollama provides the local AI brain for command interpretation, while the safety layer blocks or approval-gates risky shell and file actions.',
+      ],
+      decisions: [
+        'Removed Windows auto-start and made `jarvis wake` the explicit entry point so the assistant runs only when needed.',
+        'Kept runtime data, local config, notes, screenshots, and reports outside the repository under the local Jarvis home folder.',
+        'Added a dashboard mic-reservation state so browser polling does not fight the wake listener for microphone access.',
+      ],
+      failureModes: [
+        'The startup theme originally blocked the boot sequence, so playback is now bounded and the flow continues predictably.',
+        'The dashboard could show stale LINK LOST telemetry if the backend died, so the wake path was tested through the real launcher and `/state` endpoint.',
+        'Public demos can accidentally expose personal paths or local artifacts, so the repo includes a safe config example and ignores local runtime folders.',
+      ],
+      recruiterTakeaway: 'This project shows end-to-end ownership across Python packaging, Windows automation, local AI integration, browser UI, voice workflows, debugging, and safety-minded design.',
+    },
+  },
   {
     title: 'FastAPI Geospatial Data Service',
     area: 'Backend and data infrastructure',
@@ -280,6 +326,12 @@ export default function Projects() {
             </div>
 
             <div className="mb-4">
+              {project.media && (
+                <figure className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-black/30">
+                  <img src={project.media.src} alt={project.media.alt} className="h-auto w-full object-cover" loading="lazy" />
+                </figure>
+              )}
+
               {project.proofType && (
                 <div className="motion-card rounded-lg border border-primary/15 bg-primary/[0.06] p-3">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase text-primary">

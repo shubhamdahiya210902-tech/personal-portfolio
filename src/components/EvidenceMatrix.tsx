@@ -5,7 +5,7 @@ const stackGroups = [
     title: 'Built hands-on',
     subtitle: 'Used in research work or substantial projects',
     icon: <Code2 className="h-5 w-5" />,
-    items: ['Python', 'FastAPI', 'REST APIs', 'PostgreSQL', 'MariaDB-Galera', 'AWS-hosted services', 'MISP integration', 'Git/GitHub'],
+    items: ['Python', 'FastAPI', 'REST APIs', 'PostgreSQL', 'Ollama', 'Windows automation', 'MISP integration', 'Git/GitHub'],
   },
   {
     title: 'AI and ML evidence',
@@ -29,6 +29,10 @@ const proofMap = [
   {
     question: 'Can he work with LLMs beyond prompts?',
     answer: 'LangGraph workflow for requirement extraction, evidence mapping, scoring rubrics, groundedness checks, and human approval.',
+  },
+  {
+    question: 'Can he ship a usable local tool?',
+    answer: 'Jarvis local PC assistant with a global CLI, Brave dashboard, Ollama-backed command routing, voice wake flow, and safety gates.',
   },
   {
     question: 'Can he handle security-sensitive integrations?',
